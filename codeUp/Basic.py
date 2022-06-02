@@ -167,4 +167,45 @@
 #   num = int(input())
 
 #6072
+# n = int(input())
+# while n != 0:
+#   print(n)
+#   n -= 1
+
+#6073
+# n = int(input())
+# while n != 0:
+#   n -= 1
+#   print(n)
+
+#6074 end 이해하기.
+# s = ord('a')
+# a = ord(input())
+# while s <= a:
+#   print(chr(s) , end=' ')
+#   s += 1
+
+#6075
+# n = int(input())
+# s = 0
+# while s <= n:
+#   print(s)
+#   s += 1
+
+#6076
+# for i in range(int(input())+1):
+#   print(i)
+
+#6077
+# n = 0
+# for i in range(int(input())+1):
+#   if(i%2==0):
+#     n+=i
+# print(n)
+
+#6078
+# n = ''
+# while n != 'q':
+#   n = input()
+#   print(n)
 
