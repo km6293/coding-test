@@ -209,3 +209,36 @@
 #   n = input()
 #   print(n)
 
+#6079
+# s = int(input())
+# n = 1
+# r = 1
+# while n < s:
+#   r += 1
+#   n += r
+# print(r)
+
+#6080
+# a, b = input().split()
+# for i in range(int(a)):
+#   for r in range(int(b)):
+#     print(i+1,r+1)
+
+#다른 풀이 map 을 씀으로써 1개를 덜 쓰게 되었다.
+# a, b = map(int, input().split())
+# for i in range(a):
+#   for r in range(b):
+#     print(i+1,r+1)
+
+#6081
+# 참고 
+# print('%X'%n) n에 저장되어있는 값을 16진수(hexadecimal) 형태로 출력
+# 작은 따옴표 2개를 사용해서 print(..., sep='') 으로 출력하면, 공백없이 모두 붙여 출력된다. 
+# 작은 따옴표 2개 '' 또는 큰 따옴표 2개 "" 는 아무 문자도 없는 빈문자열(empty string)을 의미한다. 
+
+# n = input()
+# if n 
+# for i in range(16):
+#   # print('%X'%n, '*%X'%i, '=%X'%(n*i), sep='') 
+#   print('%X'%int(n))
+#   # print('%X'%i)
