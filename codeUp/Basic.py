@@ -235,10 +235,71 @@
 # print('%X'%n) n에 저장되어있는 값을 16진수(hexadecimal) 형태로 출력
 # 작은 따옴표 2개를 사용해서 print(..., sep='') 으로 출력하면, 공백없이 모두 붙여 출력된다. 
 # 작은 따옴표 2개 '' 또는 큰 따옴표 2개 "" 는 아무 문자도 없는 빈문자열(empty string)을 의미한다. 
+# int ==> 변환 해줌.
 
 # n = input()
-# if n 
-# for i in range(16):
-#   # print('%X'%n, '*%X'%i, '=%X'%(n*i), sep='') 
-#   print('%X'%int(n))
-#   # print('%X'%i)
+# if not n.isdigit():
+#   n = int(n,16)
+# for i in range(1, 16):
+#   print('%X'%n, '*%X'%i, '=%X'%(n*i), sep='')
+
+#6082
+# n = int(input())
+# r = [3,6,9]
+# for i in range(1, n+1):
+#   if i % 10 in r :
+#     print('X', end = ' ')
+#   else:
+#     print(i, end=' ')
+
+#6083
+# a,b,c = map(int,input().split())
+# for q in range(a):
+#   for w in range(b):
+#     for e in range(c):
+#       print(q, w, e)
+# print(a*b*c)
+
+#6084
+# a, b, c, d = map(int, input().split())
+# print(round(a*b*c*d/8/1024/1024,1) , 'MB')
+
+#6085
+# a, b, c = map(int, input().split())
+# print(f'{a*b*c/8/1024/1024:.2f} MB')
+
+# 다른 풀이
+# .f의 해석이 부족했음.
+# w,h,b = input().split()
+# res=int(w)*int(h)*int(b)/1024/1024/8
+# print('%.2f'%res,"MB")
+
+#6086
+# n = int(input())
+# s = t = 0
+# while s <= n:
+#   if s >= n:
+#     break
+#   t+=1
+#   s+=t
+# print(s)
+
+#6087
+# n = int(input())
+# for i in range(1,n+1):
+#   if i % 3 == 0:
+#     continue
+#   else:
+#     print(i , end =' ')
+
+#6088
+# a,b,c = map(int, input().split())
+# print(a+(c-1)*(b))
+
+#6089
+# a,b,c = map(int, input().split())
+# print(a*b**(c-1))
+
+
+
+
