@@ -300,6 +300,30 @@
 # a,b,c = map(int, input().split())
 # print(a*b**(c-1))
 
+#6090
+# a,b,c,d = map(int, input().split())
+# for i in range(d-1):
+#   a = a * b + c
+# print(a)
+
+#6091
+# from math import lcm
+# a,b,c = map(int,input().split())
+# print(lcm(a,b,c))
+# codeUp에서는 import 는 안되는 것 같음
+
+a,b,c = map(int,input().split())
+d = 1
+while d%a != 0 or d%b != 0 or d%c != 0:
+  d += 1
+print(d)
+
+
+
+
+
+
+
 
 
 
