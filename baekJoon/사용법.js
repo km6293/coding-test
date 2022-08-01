@@ -1,31 +1,32 @@
+
 // npm install fs
-
-//한 줄인 경우
 let fs1 = require('fs');
-var input = fs1.readFileSync('/dev/stdin').toString().split(' ');
+var input = fs1.readFileSync('baekJoon/example.txt').toString().split(' ');
+// * 백준 밖에서 풀어볼때는 input값을 담은 txt파일을 만들어서 readFileSync에 담으면 된다. 백준에서는 /dev/stdin을 넣으면 된다.
 
-let num = Number(input);
+const A = parseInt(input[0]);
+const B = parseInt(input[1]);
 
-for (let i = 1; i <= num; i++) {
-  console.log(i);
-}
+// console.log(A+B);
 
-//여러 줄인 경우
-let fs2 = require('fs');
-var input = fs2.readFileSync('/dev/stdin').toString().split('\n');
+// =====================================================================
 
-let count = input[0];
-let numbers = [];
+// npm install readline
+const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
 
-for (let i = 1; i < input.length; i++) {
-  if (input[i] !== '') {
-    numbers.push(input[i].split(' '));
-  }
-}
+rl.on("line", (line) => {
+  const input = line.split(' ');
+  const result = Number(input[0])+Number(input[1]);
+  console.log(result);
 
-for (let i = 0; i < numbers.length; i++){
-  let num1 = Number(numbers[i][0]);
-  let num2 = Number(numbers[i][1]);
+  rl.close();
+}).on('close', ()=>{
+  process.exit();
+});
 
-  console.log(num1 + num2);
-}
+
+
