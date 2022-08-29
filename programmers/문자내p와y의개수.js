@@ -12,9 +12,7 @@ function solution(s){
 // console.log(solution("pPoooyY"))
 // console.log(solution("pPY"))
 
-
 // 다른사람 풀이
-
 function numPY(s){
   //함수를 완성하세요
     return s.toUpperCase().split("P").length === s.toUpperCase().split("Y").length;
