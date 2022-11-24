@@ -7,7 +7,7 @@ function solution(n) {
     if(n[i] == arr1[chkCnt]){cnt1+=1};
     if(n[i] == arr2[chkCnt]){cnt2+=1};
     if(n[i] == arr3[chkCnt]){cnt3+=1};
-    if(chkCnt == 40){chkCnt = 0;}else{chkCnt += 1;}
+    if(chkCnt == 39){chkCnt = 0;}else{chkCnt += 1;}
   }
   let max = [];
   if(cnt1 > cnt2){
@@ -35,14 +35,13 @@ function solution(n) {
       max = [3];
     }
   }
-
   return max
 }
 
-console.log(solution([1,3,2,4,2,3,3,1,4,1,3]))
+// console.log(solution([1,3,2,4,2,3,3,1,4,1,3]))
 console.log(solution([1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,3]))
-console.log(solution([2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5]))
-console.log(solution([3,3,1,1,2,2,4,4,5,5,3,3,1,1,2,2,4,4,5,5,3,3,1,1,2,2,4,4,5,5,3,3,1,1,2,2,4,4,5,5]))
+// console.log(solution([2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5,2,1,2,3,2,4,2,5]))
+// console.log(solution([3,3,1,1,2,2,4,4,5,5,3,3,1,1,2,2,4,4,5,5,3,3,1,1,2,2,4,4,5,5,3,3,1,1,2,2,4,4,5,5]))
 
 
 // [1,2,3,4,5]	[1]
