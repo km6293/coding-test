@@ -1,54 +1,32 @@
 function solution(dartStr) {
-  let str = dartStr;
-  let fLen = 0;
-  let lLen = str.length;
-  let arr = [0];
-  
-  for(let i = 0; i < 2; i++){
-    str = str.substring(fLen+1, lLen);
-    fLen = str.search(/[1-9]/g);
-    if(str.indexOf('10')!=-1)fLen = str.indexOf('10');
-    console.log(str.indexOf('10'))
-    arr.push(arr[i]+fLen+1);  
-
+  let arr = [[],[],[]];
+  let [n,sum] = [0,0];
+  for(let i = 0; i < dartStr.length; i++){
+    arr[n].push(dartStr[i]);
+    if(isNaN(dartStr[i]) && (dartStr[i+1] != '*' && dartStr[i+1] != '#')) n += 1;
   }
-  let strArr = [
-    dartStr.substring(arr[0],arr[1]), 
-    dartStr.substring(arr[1],arr[2]), 
-    dartStr.substring(arr[2],dartStr.length)
-  ];
-
-  sum = 0;
-  for(let i = 0; i < 3; i++){
-    let testStr = strArr[i];
-    let result = parseInt(testStr.replace(/[^0-9]/g, ""));
-    if(strArr[i].indexOf('S') != -1) result *= 1;
-    if(strArr[i].indexOf('D') != -1) result **= 2;
-    if(strArr[i].indexOf('T') != -1) result **= 3;
-    if(strArr[i].indexOf('#') != -1) result *= -1;
-    if(strArr[i].indexOf('*') != -1) result *= 2;
-    if(i != 2){
-      if(strArr[i+1].indexOf('*') != -1) result *= 2;  
-    }
-    if(!isNaN(result))sum += result
-  }
-  
-  return sum;
+  arr.forEach((e,i) => {
+    let [num, str, spe] = ['','',''];
+    e.forEach( r => { !isNaN(r) ? num += r : ['#','*'].indexOf(r) > -1 ? spe = r : str = r; })
+    num = parseInt(num);
+    if(str == ('D')) num **= 2;
+    if(str == ('T')) num **= 3;
+    if(spe == ('#')) num *= -1;
+    if(spe == ('*')) num *= 2;
+    if(i != 2 && (arr[i+1].indexOf('*') != -1)) num *= 2;
+    sum += num;
+  })
+  return sum
 }
 
-
-
-
-
 // console.log('1 ====>' ,solution('1S2D*3T'));
-console.log('2 ====>' ,solution('1D2S#10S'));
+// console.log('2 ====>' ,solution('1D2S#10S'));
 // console.log('3 ====>' ,solution('1D2S0T'));
 // console.log('4 ====>' ,solution('1S*2T*3S'));
 // console.log('5 ====>' ,solution('1D#2S*3S'));
 // console.log('6 ====>' ,solution('1T2D3D#'));
 // console.log('7 ====>' ,solution('1D2S3T*'));
-// console.log(solution('10S10S10S'))
-
+// console.log(solution('10S10S10S#'))
 
 // 1	1S2D*3T	  37	11 * 2 + 22 * 2 + 33
 // 2	1D2S#10S	9	  12 + 21 * (-1) + 101
