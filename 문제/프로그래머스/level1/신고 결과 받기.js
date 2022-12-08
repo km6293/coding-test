@@ -2,7 +2,7 @@ function solution(idList, report, k) {
   let [arr, chkId] = [[...new Set(report)],[]];
   let [cntArr,reVal] = [Array(idList.length).fill(0),Array(idList.length).fill(0)];
   arr.forEach(e => {
-    let deId = e.substring(e.indexOf(' ')+1,e.length)
+    let deId = e.substring(e.indexOf(' ')+1,e.length);
     idList.forEach((f,i) => {
       if(f == deId) cntArr[i] += 1;
     })
