@@ -6,7 +6,7 @@ function solution(s) {
         delCnt += 1; 
         zero += 1; 
       }
-    }
+    } 
     s = (s.length - zero).toString(2);
     chgCnt += 1;
     zero = 0;
