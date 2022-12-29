@@ -1,5 +1,13 @@
 function solution(arr){
-  // 미완
+  let sum = arr.reduce((a,b) => a+b)
+  for(let i = 0; i < arr.length-1; i++){
+    for(let j = i+1; j < arr.length; j++){
+      if(sum - (arr[i]+arr[j]) == 100){
+        [j,i].forEach(e => arr.splice(e, 1))
+        return arr
+      }
+    }
+  }
 }
 
 
