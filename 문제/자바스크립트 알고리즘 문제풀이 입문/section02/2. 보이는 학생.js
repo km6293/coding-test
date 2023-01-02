@@ -3,7 +3,7 @@ function solution(a, arr){
   arr.forEach(e => {
     if(e > max){
       max = e;
-      cnt += 1;
+      cnt += 1; 
     }
   })
   return cnt
