@@ -1,8 +1,18 @@
-// const solution = (numbers) => numbers.reduce((a, c) => a += c, 0) / numbers.length
+function solution(ingredient) {
+  let cnt = 0;
+  let str = ingredient.join("");
+  while (/1231/.test(str)) {
+    cnt += str.match(/1231/g).filter(function (item) {
+      return item !== "";
+    }).length;
+    str = str.replace(/1231/g, "");
+  }
+  return cnt;
+}
 
-const solution = (arr,h) => arr.filter(e => e > h).length
+console.log(solution([1, 2, 1, 1, 2, 3, 1, 2, 3, 1, 3, 1]), 3);
+// console.log(solution([1, 3, 2, 1, 2, 1, 3, 1, 2]), 0);
+// console.log(solution([1, 2, 3, 1, 1, 2, 3, 1, 1, 2, 3, 1]), 3);
 
-// console.log(solution([149, 180, 192, 170], 167),	3)
-// console.log(solution([180, 120, 140],190),	0)
-// console.log([1,2,3].map(e => e))
-console.log([3,1,2,3].sort()[0])
+// [2, 1, 1, 2, 3, 1, 2, 3, 1]	2
+// [1, 3, 2, 1, 2, 1, 3, 1, 2]	0
