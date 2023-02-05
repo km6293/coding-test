@@ -1,18 +1,14 @@
-function solution(ingredient) {
+function solution(str1, str2) {
   let cnt = 0;
-  let str = ingredient.join("");
-  while (/1231/.test(str)) {
-    cnt += str.match(/1231/g).filter(function (item) {
-      return item !== "";
-    }).length;
-    str = str.replace(/1231/g, "");
+  let arr = str2.split("").sort().join("");
+  console.log(arr);
+  for (let i = 0; i < str1.length - str2.length + 1; i++) {
+    let chk = str1[i];
+    for (let j = i + 1; j < i + str2.length; j++) {
+      chk += str1[j];
+    }
+    if (arr == chk.split("").sort().join("")) cnt += 1;
   }
   return cnt;
 }
-
-console.log(solution([1, 2, 1, 1, 2, 3, 1, 2, 3, 1, 3, 1]), 3);
-// console.log(solution([1, 3, 2, 1, 2, 1, 3, 1, 2]), 0);
-// console.log(solution([1, 2, 3, 1, 1, 2, 3, 1, 1, 2, 3, 1]), 3);
-
-// [2, 1, 1, 2, 3, 1, 2, 3, 1]	2
-// [1, 3, 2, 1, 2, 1, 3, 1, 2]	0
+console.log(solution("bacaAacba", "abc"), 3);
