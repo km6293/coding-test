@@ -16,7 +16,6 @@ console.log(solution(1))
 
 // 해석
 
-// 1. 전위순회 출력
 // dfs(1) => arr = [1]  
 //   dfs(2) => arr = [1, 2]
 //     dfs(4) => arr[1, 2, 4]
@@ -32,5 +31,3 @@ console.log(solution(1))
 //     dfs(7) => arr[1, 2, 4, 5, 3, 6, 7]
 //       dfs(14) => return
 //       dfs(15) => return
-
-// 2. 중위순회 출력
