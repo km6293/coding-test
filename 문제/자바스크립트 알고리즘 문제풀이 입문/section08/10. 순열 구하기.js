@@ -4,7 +4,7 @@ function solution(m, arr){
   let tmp=[];
   function DFS(L){ 
     if(L===m){
-      answer.push(tmp.slice()); 
+      answer.push([...tmp]); 
     }
     else{
       for(let i=0; i<arr.length; i++){

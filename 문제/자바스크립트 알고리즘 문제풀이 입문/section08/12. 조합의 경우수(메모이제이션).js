@@ -13,4 +13,5 @@ function solution(n,m){
   return sum
 }
 
-console.log(solution(5,3)) // 10
+// console.log(solution(5,3)) // 10
+console.log(solution(33, 19)) // 818809200
