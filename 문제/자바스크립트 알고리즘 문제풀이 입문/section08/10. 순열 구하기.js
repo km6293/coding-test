@@ -1,17 +1,26 @@
-function solution(m, arr) {
-  const result = [];
-
-  // DFS 함수
-  function dfs(depth, start) {
-    for (let i = start; i < arr.length; i++) {
-      dfs(depth + 1, i); // 재귀 호출
+// 다시 공부 하기
+function solution(m, arr){         
+  let answer=[];
+  let ch=Array.from({length:arr.length}, ()=>0);
+  let tmp=[];
+  function DFS(L){ 
+    if(L===m){
+      answer.push(tmp.slice()); 
+    }
+    else{
+      for(let i=0; i<arr.length; i++){
+        if(ch[i]===0){
+          ch[i]=1;
+          tmp.push(arr[i]);
+          DFS(L+1);
+          ch[i]=0;
+          tmp.pop();
+        }
+      }
     }
   }
-
-  dfs(0, 0);
-
-  return [...result, result.length]
-
+  DFS(0);
+  return answer;
 }
 
 
