@@ -1,4 +1,3 @@
-// 다시 공부 하기
 function solution(m, arr){         
   let answer=[];
   let ch=Array.from({length:arr.length}, ()=>0);
