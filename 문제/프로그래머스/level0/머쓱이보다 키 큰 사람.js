@@ -1,0 +1,1 @@
+const solution = (arr,h) => arr.filter(e => e > h).length
