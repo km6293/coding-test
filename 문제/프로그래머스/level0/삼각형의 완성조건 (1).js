@@ -1,0 +1,1 @@
+const solution = (n) => n.sort()[2] >= n.sort()[0] + n.sort()[1] ? 2 : 1
