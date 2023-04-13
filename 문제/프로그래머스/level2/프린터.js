@@ -8,7 +8,6 @@ function solution(arr, num){
   while(true){
     
     let fIndex = arr.findIndex(e => e == sArr[0]);
-    console.log(arr, nArr, sArr, fIndex)
     arr = [...arr.slice(fIndex, arr.length) , ...arr.slice(0, fIndex)]
     nArr = [...nArr.slice(fIndex, nArr.length) , ...nArr.slice(0, fIndex)]
     
