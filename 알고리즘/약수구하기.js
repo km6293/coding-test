@@ -10,4 +10,4 @@ const getDivisors = (num) => {
   // divisors.sort((a, b) => a - b);
   return divisors;
 }
-// console.log(getDivisors(1))
+console.log(getDivisors(6))

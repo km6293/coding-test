@@ -1,12 +1,12 @@
-function solution(n){
-  let s = parseInt(n / 10);
-  let r = parseInt(n % 10);
-  while(parseInt(n / 10) >= 1){
-    
+function solution(c) {
+
+  let f = 0;  
+  while (c >= 10) {
+    f += Math.floor(c / 10);
+    c = Math.floor(c / 10) + (c % 10);
   }
-  console.log(s, r)
-
-
+  
+  return f;
 }
 
-console.log(solution(1081))
+console.log(solution(1999))
