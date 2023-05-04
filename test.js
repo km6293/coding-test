@@ -1,5 +1,3 @@
-let test = ' ';
-// console.log(!(test.trim()))
-
-let test2 = null;
-console.log(!test2)
+let a = 11;
+let b = a.toString(3);
+console.log(b)
