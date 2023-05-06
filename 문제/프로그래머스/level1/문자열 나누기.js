@@ -1,5 +1,22 @@
 function solution(s) {
-  // 추후 문제 이해 후 다시 진행...
+  s = s.split('');
+  let answer = 0;
+  let count = 1;
+  let index = 1;
+  while (s.length) {
+    let firstChar = s[0];
+    firstChar == s[index] ? count += 1 : count -= 1;
+    if (count !== 0) {
+      index += 1;
+    } else {
+      answer += 1;
+      s.splice(0, index + 1);
+      index = 1;
+      count = 1;
+    }
+  }
+
+  return answer;
 }
 
 // console.log(solution("banana"),3)
