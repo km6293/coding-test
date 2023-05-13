@@ -116,9 +116,56 @@ function solution(arr){
     if(nCnt != -1) break;
   }
   if(nCnt == -1) return -1
-  
+
   return rCnt + nCnt
 }
+
+// 축약
+function solution(arr) {
+  const dx = [1, -1, 0, 0];
+  const dy = [0, 0, -1, 1];
+  let [rCnt, nCnt] = [-1, -1];
+
+  const bfs = (queue, cnt, targetArr, target) => {
+    while (queue.length) {
+      const [x, y, c] = queue.shift();
+      for (let i = 0; i < 4; i++) {
+        const mx = x + dx[i];
+        const my = y + dy[i];
+        if ( mx >= 0 && my >= 0 && mx <= targetArr.length - 1 && my <= targetArr[0].length - 1 && targetArr[mx][my] !== 'X' ) {
+          if (targetArr[mx][my] === target) cnt = c + 1;
+          queue.push([mx, my, c + 1]);
+          targetArr[mx][my] = 'X';
+        }
+      }
+      if (cnt !== -1) break;
+    }
+    return cnt;
+  };
+
+  const rArr = arr.map((row) => [...row]);
+  const nArr = arr.map((row) => [...row]);
+  const [start, end, lever] = [[],[],[]];
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let r = 0; r < arr[i].length; r++) {
+      if (arr[i][r] === 'S') start.push(i, r);
+      if (arr[i][r] === 'E') end.push(i, r);
+      if (arr[i][r] === 'L') lever.push(i, r);
+    }
+  }
+
+  const rQueue = [[...start, 0]];
+  const nQueue = [[...lever, 0]];
+
+  rCnt = bfs(rQueue, rCnt, rArr, 'L');
+  nCnt = bfs(nQueue, nCnt, nArr, 'E');
+
+  if (rCnt === -1 || nCnt === -1) return -1;
+
+  return rCnt + nCnt;
+}
+
 
 
 // console.log(solution(
