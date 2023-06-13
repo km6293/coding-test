@@ -3,41 +3,36 @@ const [n, r] = require('fs').readFileSync(__dirname + "/../input.txt").toString(
 
 // n제곱만큼 2차원배열 0으로 채움
 let list = Array.from(new Array(n),  () => Array(n).fill(0));
-list[(n - 1)/2][(n - 1)/2] = 1;
 
-console.log(list)
-
-// 현재 좌표, return할 좌표, 동서남북
-let location = [(n - 1)/2, (n - 1)/2];
+// 현재 좌표, return할 좌표
+let location = [0, 0];
 let resultLocation = [];
-let nowDirection = 0;
-let dy = [-1, 0, 1, 0];
+
+// 남 동 북 서 (반시계방향)
+let dy = [1, 0, -1, 0];
 let dx = [0, 1, 0, -1];
+let direction = 0;
 
-let [inc, incChk] = [1, 3];
+for(let i = n**2; i > 0; i--){
+  // 현재 좌표를 list를 변경 시킨다.
+  list[location[0]][location[1]] = i;
 
-for(let i = 1; i <= n**2; i++){
-  
-  // incChk -= 1;
-  // if(i == (incChk - 1) / 2) {
-  //   nowDirection += 1;
-  // }
-  // else if(incChk == 0){
-  //   inc += 1;
-  //   incChk = (inc * 2) + 1;
-  //   nowDirection = nowDirection == 3 ? 0 : nowDirection + 1;
-  // }
-  
-  // location[0] += dy[nowDirection];
-  // location[1] += dx[nowDirection];
+  // 다음갈 곳이 벗어났거나 0이 아니라면
+  if(location[0] + dy[direction] < 0 || location[1] + dx[direction] < 0 || location[0] + dy[direction] >= n || location[1] + dx[direction] >= n){
+    direction = direction == 3 ? 0 : direction + 1;
+  }else if(list[location[0] + dy[direction]][location[1] + dx[direction]] != 0){
+    direction = direction == 3 ? 0 : direction + 1;
+  }
 
-  // // 값 변경
-  // list[location[0]][location[1]] = i;
+  let ny = location[0] + dy[direction];
+  let nx = location[1] + dx[direction];
 
-  // // 원하는 값의 좌표
-  // if(i == r) resultLocation = location; 
+  // 다음방향 결정
+  location = [ny, nx];
+
+  // 원하는 좌표 따로 빼두기
+  if(i-1 == r) resultLocation.push(...location);
 }
 
-
-
-
+list.forEach(e => console.log(...e));
+console.log(resultLocation[0] + 1, resultLocation[1] + 1);
