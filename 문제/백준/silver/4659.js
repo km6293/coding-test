@@ -1,30 +1,38 @@
 const input = require('fs').readFileSync(__dirname + "/../input.txt").toString().trim().split("\n")
 // const input = require('fs').readFileSync("/dev/stdin").toString().trim().split("\n");
 
-let chkList = ['i','e','u','o','a'];
+let vowels = ['i','e','u','o','a'];
 
-for(let i = 0; i < input.length; i++){
-  let chk = false;
+for(let i = 0; i < input.length-1; i++){
+  
+  const word = input[i];
+  let chk = true;
 
-  // 모음 하나 포함 되어 있다면
-  if(input[i].split('').some(e => chkList.includes(e))){
-
-    // 모음 3개 / 자음 3개 연속 되었다면
-    for(let r = 0; r < input[i].length -2; r++){
-      if(chkList.includes(input[i][r]) && chkList.includes(input[i][r+1]) && chkList.includes(input[i][r+2]) || 
-      (!chkList.includes(input[i][r]) && !chkList.includes(input[i][r+1]) && !chkList.includes(input[i][r+2]))){
-        break;
-      }else{
-        chk = true;
-        break;
-      }
-    }
-    // 같은 글자 x
-    for(let r = 0; r < input[i].length - 1; r++){
-      if((input[i][r] == input[i][r+1]) && !((input[i][r] == 'e' && input[i][r+1] == 'e') || (input[i][r] == 'o' && input[i][r+1] == 'o'))){
-        chk = true;
+  // 모음 하나 포함
+  if(!vowels.some(vowel => word.includes(vowel))) chk = false;
+  
+  // 모음 or 자음 연속 3번 x
+  if(chk){
+    for(let r = 0; r < word.length-2; r++){
+      const slice = word.slice(r, r + 3);
+      if((vowels.includes(slice[0]) && vowels.includes(slice[1]) && vowels.includes(slice[2])) ||
+      (!vowels.includes(slice[0]) && !vowels.includes(slice[1]) && !vowels.includes(slice[2]))){
+        chk = false;
         break;
       }
     }
   }
+
+  // 같은 글자 안됨, (ee, oo 가능)
+  if(chk){
+    for(let r = 0; r < word.length-1; r++){
+      if( word[r] === word[r+1] && (word[r] != 'e' && word[r+1] != 'e' ) && (word[r] != 'o' && word[r+1] != 'o') ){
+        chk = false;
+        break;
+      }
+    }
+  }  
+  
+  let acceptability = chk ? 'acceptable.' : 'not acceptable.';
+  console.log(`<${word}> is ${acceptability}`);
 }
