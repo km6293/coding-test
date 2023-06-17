@@ -10,6 +10,6 @@ while(nArr.length != 1){
   nArr.unshift(nArr.pop());
 }
 
-console.log(...rArr, ...nArr)
+console.log(...rArr, ...nArr);
 
 
