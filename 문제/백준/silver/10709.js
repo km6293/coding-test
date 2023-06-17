@@ -9,9 +9,7 @@ for(let i = 0; i < arr.length; i++){
       num = 0;
       rArr[i][r] = num;      
     }
-    if(arr[i][r] == '.' && num != -1){
-      rArr[i][r] = num;
-    }
+    if(arr[i][r] == '.' && num != -1) rArr[i][r] = num;
     if(num != -1) num += 1; 
   }
 }
