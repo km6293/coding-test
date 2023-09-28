@@ -1,0 +1,2 @@
+console.log(Math.max(...require('fs').readFileSync(__dirname + "/../input.txt").toString().split(' ').map(e => parseInt(e.split('').reverse().join('')))));
+// console.log(Math.max(...require('fs').readFileSync("/dev/stdin").toString().split(' ').map(e => parseInt(e.split('').reverse().join('')))));
