@@ -32,3 +32,9 @@ const [nArr, ...arr] = require('fs').readFileSync(__dirname + "/../input.txt").t
 
 // console.log(dupl.length);
 // dupl.forEach(v => console.log(v));
+
+
+let obj = {};
+arr.forEach(e => obj[e] = (obj[e] || 0) + 1);
+let double = Object.keys(obj).filter(e => obj[e] > 1); 
+console.log(double.length+'\n'+double.sort().join('\n'));
