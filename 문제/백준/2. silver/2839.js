@@ -1,7 +1,7 @@
 let input = parseInt(require('fs').readFileSync(__dirname + "/../input.txt").toString())
 // let input = parseInt(require('fs').readFileSync("/dev/stdin").toString());
 
-// 1번 풀이
+// 1번 풀이 - 이게 더 빠름
 // let cnt = 0;
 // while(true){
 //   if(input % 5 === 0){
