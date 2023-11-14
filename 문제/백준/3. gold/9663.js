@@ -1,4 +1,31 @@
-let num = require('fs').readFileSync(__dirname + "/../input.txt").toString().trim();
-// let num = require('fs').readFileSync("/dev/stdin").toString().trim();
+let num = Number(require('fs').readFileSync(__dirname + "/../input.txt").toString().trim());
+// let num = Number(require('fs').readFileSync("/dev/stdin").toString().trim());
 
-console.log([1, 0, 0, 2, 10, 4, 40, 92, 352, 724, 2680, 14200, 73712, 365596, 2279184][+num-1]);
+const chk = (ax, ay, bx, by) => (ax == bx || ay == by || Math.abs((ax - bx) / (ay - by)) == 1);
+
+let cnt = 0;
+const arr = [];
+function dfs(depth){
+
+  if(depth == num){
+    cnt += 1;
+    return;
+  }
+
+  for(let i = 0; i < num; i++){
+    let isChk = true;
+    for(let j = 0; j < arr.length; j++) {
+      if(chk(i, depth, arr[j], j)) isChk = false;
+    }
+
+    if(isChk){
+      arr.push(i);
+      dfs(depth + 1);
+      arr.pop();
+    }
+
+  }
+}
+dfs(0);
+
+console.log(cnt);
