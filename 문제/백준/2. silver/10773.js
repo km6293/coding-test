@@ -1,14 +1,8 @@
-const fs = require("fs");
-const filePath =
-  process.platform === "linux" ? "/dev/stdin" : __dirname + "/../input.txt";
-const [n, ...input] = fs.readFileSync(filePath).toString().trim().split(/\s/);
+let [k, ...list] = require('fs').readFileSync(__dirname + "/../input.txt").toString().trim().split('\n')
+// let [k, ...list] = require('fs').readFileSync("/dev/stdin").toString().trim().split('\n')
 
 let arr = [];
-for (let i = 0; i < n; i++) {
-  input[i] == 0 ? arr.pop() : arr.push(input[i]);
+for (let i = 0; i < k; i++) {
+  list[i] == 0 ? arr.pop() : arr.push(list[i]);
 }
-const val =
-  arr.length == 0
-    ? 0
-    : arr.reduce((total, item) => parseInt(total) + parseInt(item));
-console.log(val);
+console.log(arr.length === 0 ? 0 : arr.reduce((a, b) => +a + +b));
