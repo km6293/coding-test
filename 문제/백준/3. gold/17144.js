@@ -1,109 +1,90 @@
 let [n, ...input] = require('fs').readFileSync(__dirname + "/../input.txt").toString().trim().split("\n");
 // let [n, ...input] = require('fs').readFileSync("/dev/stdin").toString().trim().split("\n");
 
+const [R, C, T] = n.split(' ').map(Number);
+const airPurifierCoord = [];
+input = input.map(row => row.split(' ').map(Number))
 
-let [col, row, time] = n.split(' ').map(Number);
-let arr = [...input].map(e => e.split(' ').map(Number));
-let airCleaner = [];
-arr.forEach((e,i) => e.forEach((r,p) => {if(r == -1) airCleaner.push([i,p])}));
+for(let i = 0; i < R; i++){
+  if(input[i][0] === -1) airPurifierCoord.push(i)
+}
 
-let dy = [0, 0, -1, 1];
-let dx = [1, -1, 0, 0];
+const ny = [0, 0, -1, 1];
+const nx = [1, -1, 0, 0];
 
-for(let i = 0; i < time; i++){
-  let diffusionArr = new Array(col).fill(0).map(() => new Array(row).fill(0));
-
-  for(let h = 0; h < col; h++){
-    for(let w = 0; w < row; w++){
-      if(arr[h][w] > 0){
-        if(arr[h][w] > 4){
-
-          let val = arr[h][w];
-          let valDiv = Math.floor(val/5);
-
-          for(let m = 0; m < 4; m++){
-            let [ my , mx ] = [ h + dy[m], w + dx[m] ];
-
-            if(my >= 0 && mx >= 0 && my < col && mx < row){
-              if(!(my == airCleaner[0][0] && mx == airCleaner[0][1]) && !(my == airCleaner[1][0] && mx == airCleaner[1][1])){
-                val -= valDiv;
-                diffusionArr[my][mx] += valDiv;
-              }
-            }
-          }
-          diffusionArr[h][w] += val;
-        }else{
-          diffusionArr[h][w] += arr[h][w];
-        }
-      }
-    }
-  }
-
-  let locationList = [];
-  let valueList = [];
-
-  for(let h = 0; h < col; h++){
-    for(let w = 0; w < row; w++){
-      if(diffusionArr[h][w] > 0){
-        if(h >= 0 && h < airCleaner[0][0] && w == 0) {
-          locationList.push([h+1, w]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-        else if(h == 0 && w > 0 && w < row){
-          locationList.push([h,w-1]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-        else if(w == row-1 && h > 0 && h <= airCleaner[0][0]){
-          locationList.push([h-1,w]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-        else if(w > 0 && w < row-1 && h == airCleaner[0][0]) {
-          locationList.push([h,w+1]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-        else if(h > airCleaner[1][0] && h < row && w == 0) {
-          locationList.push([h-1,w]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-        else if(h == col-1 && w > 0 && w < row) {
-          locationList.push([h,w-1]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-        else if(w == row-1 && h >= airCleaner[1][0] && h < col-1 ) {
-          locationList.push([h+1,w]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-        else if(w > 0 && w < row-1 && h == airCleaner[1][0]) {
-          locationList.push([h,w+1]);
-          valueList.push(diffusionArr[h][w]);
-          diffusionArr[h][w] = 0;
-        }
-      }
-    }
-  }
-
-  for(let r = 0; r < locationList.length; r++){
-    if((locationList[r][0] == airCleaner[0][0] && locationList[r][1] == airCleaner[0][1]) ||
-       (locationList[r][0] == airCleaner[1][0] && locationList[r][1] == airCleaner[1][1])){
-         diffusionArr[locationList[r][0]][locationList[r][1]] = 0;
-       }else{
-         diffusionArr[locationList[r][0]][locationList[r][1]] = valueList[r];
-       }
-  }
+// 미세먼지 확산
+const dustDiffusion = () => {
+  let originInput = input.map(row => [...row]);
   
-  arr = diffusionArr.map(e => [...e]);
-  arr[airCleaner[0][0]][airCleaner[0][1]] = -1;
-  arr[airCleaner[1][0]][airCleaner[1][1]] = -1;
+  for(let i = 0; i < R; i++){
+    for(let j = 0; j < C; j++){
+      if(originInput[i][j] >= 5){
+
+        const value = Math.floor(originInput[i][j] / 5);
+        let cnt = 0;
+
+        for(let k = 0; k < 4; k++){
+          const my = i + ny[k];
+          const mx = j + nx[k];
+
+          if(my >= 0 && my < R && mx >= 0 && mx < C && input[my][mx] !== -1){
+            input[my][mx] += value
+            cnt += 1;
+          }
+        }        
+        input[i][j] -= cnt * value;
+      }
+    }
+  }
+
+
+}
+
+// 공기청정기 작동
+const airPurifierWork = () => {
+  const [up, bottom] = airPurifierCoord;
+
+  for(let i = up-1; i > 0; i--) {
+    input[i][0] = input[i-1][0];
+  }
+  for(let i = 0; i < C-1; i++) {
+    input[0][i] = input[0][i+1];
+  }
+  for(let i = 0; i < up; i++) {
+    input[i][C-1] = input[i+1][C-1];
+  }
+  for(let i = C-1; i > 1; i--) {
+    input[up][i] = input[up][i-1];
+  }
+  input[up][1] = 0;
+
+  for(let i = bottom+1; i < R-1; i++) {
+    input[i][0] = input[i+1][0];
+  }
+  for(let i = 0; i < C-1; i++) {
+    input[R-1][i] = input[R-1][i+1];
+  }
+  for(let i = R-1; i > bottom; i--) {
+    input[i][C-1] = input[i-1][C-1];
+  }
+  for(let i = C-1; i > 1; i--) {
+    input[bottom][i] = input[bottom][i-1];
+  }
+  input[bottom][1] = 0;
 }
 
 
-let total = 0;
-arr.forEach(e => e.forEach(r => {if(r > 0) total += r}));
-console.log(total);
+for(let i = 0; i < T; i++){
+  dustDiffusion()
+  airPurifierWork()
+}
+
+let sum = 0;
+
+for(let i = 0; i < R; i++){
+  for(let j = 0; j < C; j++){
+    sum += input[i][j]
+  }
+}
+
+console.log(sum+2)
